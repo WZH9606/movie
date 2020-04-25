@@ -32,10 +32,16 @@ public class ReadFromMySQL implements MySqlConnect ,Serializable {
         personalRatingsDF.createOrReplaceTempView("personalratings");
         Dataset<Row> prDF = sqlContext.sql("select * from personalratings where userid=" + userId);
 
+//        JavaRDD<String> myrdd = prDF.javaRDD().map(new Function<Row, String>() {
+//            @Override
+//            public String call(Row r) throws Exception {
+//                return r.get(0).toString() + "::" + r.get(1).toString() + "::" + r.get(2).toString() + "::" + r.get(3).toString();
+//            }
+//        });
         JavaRDD<String> myrdd = prDF.javaRDD().map(new Function<Row, String>() {
             @Override
             public String call(Row r) throws Exception {
-                return r.get(0).toString() + "::" + r.get(1).toString() + "::" + r.get(2).toString() + "::" + r.get(3).toString();
+                return r.get(1).toString() + "::" + r.get(2).toString() + "::" + r.get(3).toString() + "::" + r.get(4).toString();
             }
         });
 

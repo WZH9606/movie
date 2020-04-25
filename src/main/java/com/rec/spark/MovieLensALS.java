@@ -17,10 +17,7 @@ import scala.Tuple2;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -126,7 +123,8 @@ public class MovieLensALS implements Serializable {
         // 从关系型数据库中读取该用户对一些电影的个性化评分数据
         JavaRDD<String> personalRatingsLines = ReadFromMySQL.read(bcUserid.getValue(),sc);
 
-        JavaRDD<Rating> myRatingsRDD = loadRatings(personalRatingsLines);
+        JavaRDD<Rating> myRatings = loadRatings(personalRatingsLines);
+        JavaRDD<Rating> myRatingsRDD = sc.parallelize(myRatings.collect(),1);
 
         // 装载样本评分数据，其中最后一列Timestamp取除10的余数作为key，Rating为值,即(Int,Rating)
         // ratings.dat原始数据：用户编号、电影编号、评分、评分时间戳
@@ -145,6 +143,14 @@ public class MovieLensALS implements Serializable {
 
         // 装载电影目录对照表 （电影 ID -> 电影标题）
         //movies.dat原始数据：电影编号、电影名称、电影类别
+//        JavaPairRDD<Integer, String> movies = sc.textFile(movieLensHomeDir + "movies.dat", 1)
+//                .mapToPair(new PairFunction<String, Integer, String>() {
+//                    @Override
+//                    public Tuple2<Integer, String> call(String s) throws Exception {
+//                        String[] fields = s.split("::");
+//                        return new Tuple2<>(Integer.parseInt(fields[0]), fields[1]);
+//                    }
+//                });
         JavaPairRDD<Integer, String> movies = sc.textFile(movieLensHomeDir + "movies.dat", 1)
                 .mapToPair(new PairFunction<String, Integer, String>() {
                     @Override
@@ -178,7 +184,7 @@ public class MovieLensALS implements Serializable {
         JavaRDD<Rating> training = ratings.filter(new Function<Tuple2<Long, Rating>, Boolean>() {
             @Override
             public Boolean call(Tuple2<Long, Rating> t) throws Exception {
-                return t._1 < 6;
+                return t._1 < 6; //取评分时间除10的余数后值小于6的作为训练样本
             }
         }).values().union(myRatingsRDD).repartition(numPartitions).cache();
 
@@ -198,6 +204,7 @@ public class MovieLensALS implements Serializable {
                 return t._1 >= 8;
             }
         }).values().cache();
+
         long numTraining = training.count();
         long numValidation = validation.count();
         long numTest = test.count();
@@ -260,7 +267,7 @@ public class MovieLensALS implements Serializable {
         double improvement = (baselineRmse - testRmse) / baselineRmse * 100;
 
         // 推荐前5部最感兴趣的电影，注意要剔除用户已经评分的电影
-        JavaRDD<Integer> myRatedMovieIds = myRatingsRDD.map(new Function<Rating, Integer>() {
+        JavaRDD<Integer> myRatedMovieIds = myRatings.map(new Function<Rating, Integer>() {
             @Override
             public Integer call(Rating rating) throws Exception {
                 return rating.product();
@@ -270,10 +277,11 @@ public class MovieLensALS implements Serializable {
         Set<Integer> myRatedMoviesIdsSet = new HashSet<>(myRatedMovieIds.collect());
         Broadcast<Set<Integer>> bcMyRatedMoviesIdsSet = sc.broadcast(myRatedMoviesIdsSet);
 
+
         JavaRDD<Integer> candidates = movies.filter(new Function<Tuple2<Integer, String>, Boolean>() {
             @Override
             public Boolean call(Tuple2<Integer, String> t) throws Exception {
-                return bcMyRatedMoviesIdsSet.getValue().contains(t._1);
+                return !bcMyRatedMoviesIdsSet.getValue().contains(t._1);
             }
         }).keys();
 
