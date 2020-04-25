@@ -22,12 +22,6 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-catalyst_2.12</artifactId>
-            <version>2.4.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
             <artifactId>spark-mllib_2.12</artifactId>
             <version>${spark.version}</version>
         </dependency>
@@ -37,11 +31,13 @@
             <artifactId>spark-core_2.12</artifactId>
             <version>${spark.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.12</artifactId>
             <version>${spark.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
@@ -53,6 +49,7 @@
             <artifactId>hadoop-yarn-common</artifactId>
             <version>2.7.7</version>
         </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>
@@ -72,7 +69,6 @@
             <version>3.1.0</version>
         </dependency>
 
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -88,6 +84,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
