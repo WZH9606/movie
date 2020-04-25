@@ -1,3 +1,4 @@
+/*
 package com.rec.spark;
 
 //import org.apache.log4j.Level;
@@ -22,9 +23,11 @@ import java.sql.SQLException;
 import java.util.*;
 
 
+*/
 /**
  *
- */
+ *//*
+
 public class MovieLensALS implements Serializable {
 
     public JavaRDD<Rating> loadRatings(JavaRDD<String> lines) {
@@ -331,3 +334,4 @@ public class MovieLensALS implements Serializable {
 
 
 }
+*/
