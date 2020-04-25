@@ -320,9 +320,10 @@ public class MovieLensALS implements Serializable {
 
         Logger.getLogger("org.apache.spark").setLevel(Level.ERROR);
         Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF);
-        String movieLensHomeDir = "/Users/fang/Documents/3_科研/2_项目/movie/movie/src/main/java/com/rec/spark/Files/";
+        String movieLensHomeDir = "./Files/";
         int userid = 1;
         MovieLensALS movieLensALS = new MovieLensALS();
+
         movieLensALS.movieLensALS(movieLensHomeDir, userid);
     }
 

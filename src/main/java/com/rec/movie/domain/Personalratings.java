@@ -10,6 +10,9 @@ public class Personalratings {
      *
      * @mbggenerated
      */
+    private Integer id;
+
+
     private Integer userid;
 
     /**
