@@ -1,3 +1,4 @@
+/*
 package com.rec.spark;
 
 import java.sql.Connection;
@@ -6,9 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- *
- */
 public class DeleteFromMySQL implements MySqlConnect {
 
     public static void delete(int userId) throws SQLException {
@@ -30,3 +28,4 @@ public class DeleteFromMySQL implements MySqlConnect {
         }
     }
 }
+*/

@@ -47,6 +47,21 @@ public class Result<T> {
         return result;
     }
 
+    public  Result fail(){
+        Result result = new Result();
+        result.setCode(1);
+        result.setMessage("操作失败");
+        return result;
+    }
+
+    public  Result fail(T data){
+        Result result = new Result();
+        result.setCode(1);
+        result.setData(data);
+        result.setMessage("操作失败");
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Result [code=" + code + ", message=" + message + ", data=" + data + "]";

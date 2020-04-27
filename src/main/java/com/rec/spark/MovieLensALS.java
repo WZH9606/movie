@@ -23,10 +23,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 
-*/
-/**
- *
- *//*
 
 public class MovieLensALS implements Serializable {
 
