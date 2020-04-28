@@ -1,4 +1,4 @@
-/*
+
 package com.rec.spark;
 
 import org.apache.spark.api.java.JavaRDD;
@@ -10,10 +10,6 @@ import org.apache.spark.sql.SQLContext;
 
 import java.io.Serializable;
 
-*/
-/**
- *
- *//*
 
 public class ReadFromMySQL implements MySqlConnect ,Serializable {
 
@@ -46,4 +42,4 @@ public class ReadFromMySQL implements MySqlConnect ,Serializable {
         return myrdd;
     }
 }
-*/
+
