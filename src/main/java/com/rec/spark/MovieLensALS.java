@@ -1,8 +1,6 @@
-/*
+
 package com.rec.spark;
 
-//import org.apache.log4j.Level;
-//import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
@@ -330,4 +328,4 @@ public class MovieLensALS implements Serializable {
 
 
 }
-*/
+

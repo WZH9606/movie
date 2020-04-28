@@ -7,9 +7,9 @@ public interface MySqlConnect {
 
     static String user = "root";
 
-   // static String password = "12345678";
+    static String password = "12345678";
 
-    static String password = "123456";
+//    static String password = "123456";
 
     static String driver = "com.mysql.cj.jdbc.Driver";
 }

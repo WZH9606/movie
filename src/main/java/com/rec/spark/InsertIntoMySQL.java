@@ -1,4 +1,3 @@
-/*
 package com.rec.spark;
 
 import org.apache.spark.SparkConf;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-
 
 
 public class InsertIntoMySQL implements MySqlConnect,Serializable {
@@ -61,4 +59,4 @@ public class InsertIntoMySQL implements MySqlConnect,Serializable {
         movieDF.write().mode("append").jdbc(MySqlConnect.url,"movierecommend.recommendresult",prop);
     }
 }
-*/
+
