@@ -1,4 +1,3 @@
-/*
 package com.rec.spark;
 
 import java.sql.Connection;
@@ -28,4 +27,4 @@ public class DeleteFromMySQL implements MySqlConnect {
         }
     }
 }
-*/
+
