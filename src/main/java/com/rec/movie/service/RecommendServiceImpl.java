@@ -64,6 +64,12 @@ public class RecommendServiceImpl implements RecommendService {
         //并行执行，不影响打分，打分之后直接返回
         Thread callScale = new Thread(doALS);
         callScale.start();
+        Recommendresult temp = new Recommendresult();
+        temp.setMovieid(301);
+        temp.setMoviename("admin");
+        temp.setRating(9.9f);
+        temp.setUserid(userid);
+        recommendresultMapper.insert(temp);
         return "操作成功";
     }
 
