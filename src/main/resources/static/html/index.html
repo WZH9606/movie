@@ -1,134 +1,237 @@
-<!DOCTYPE html>
-<html>
-  <head>
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bootstrap Material Admin</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="all,follow">
-    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
-  </head>
-  <body>
-    <div class="page login-page">
-      <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow">
-          <div class="row">
-            <!-- Logo & Information Panel-->
-            <div class="col-lg-6">
-              <div class="info d-flex align-items-center">
-                <div class="content">
-                  <div class="logo">
-                    <h1>欢迎登录</h1>
-                  </div>
-                  <p>电影推荐系统</p>
-                </div>
-              </div>
-            </div>
-            <!-- Form Panel    -->
-            <div class="col-lg-6 bg-white">
-              <div class="form d-flex align-items-center">
-                <div class="content">
-                  <div class="form-group">
-                    <input id="login-username" type="text" name="userName" required data-msg="请输入用户名" placeholder="用户名" value="admin" class="input-material">
-                  </div>
-                  <div class="form-group">
-                    <input id="login-password" type="password" name="passWord" required data-msg="请输入密码" placeholder="密码" class="input-material">
-                  </div>
-                  <button id="login" type="submit" class="btn btn-primary">登录</button>
-                  <div style="margin-top: -40px;">
-                    <!-- <input type="checkbox"  id="check1"/>&nbsp;<span>记住密码</span>
-                    <input type="checkbox" id="check2"/>&nbsp;<span>自动登录</span> -->
-                    <div class="custom-control custom-checkbox " style="float: right;">
-                      <input type="checkbox" class="custom-control-input" id="check2" >
-                      <label class="custom-control-label" for="check2">自动登录</label>
-                    </div>
-                    <div class="custom-control custom-checkbox " style="float: right;">
-                      <input type="checkbox" class="custom-control-input" id="check1" >
-                      <label class="custom-control-label" for="check1">记住密码&nbsp;&nbsp;</label>
-                    </div>
-                  </div>
-                  <br />
-                  <small>没有账号?</small><a href="register.html" class="signup">&nbsp;注册</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- JavaScript files-->
-    <script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.min.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.10.2/lib/jquery.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.10.2/dist/jquery.validate.min.js"></script>
-    <!--<script src="vendor/jquery-validation/jquery.validate.min.js"></script>&lt;!&ndash;表单验证&ndash;&gt;-->
-    <!-- Main File-->
-    <!--<script src="../js/front.js"></script>-->
-    <script>
-    	$(function(){
-    		/*判断上次是否勾选记住密码和自动登录*/
-    		var check1s=localStorage.getItem("check1");
-    		var check2s=localStorage.getItem("check2");
-    		var oldName=localStorage.getItem("userName");
-    		var oldPass=localStorage.getItem("passWord");
-    		if(check1s=="true"){
-    			 $("#login-username").val(oldName);
-    			 $("#login-password").val(oldPass);
-    			 $("#check1").prop('checked',true);
-    		}else{
-    			 $("#login-username").val('');
-    			 $("#login-password").val('');
-    			 $("#check1").prop('checked',false);
-    		}
-    		if(check2s=="true"){
-    			$("#check2").prop('checked',true);
-    			$("#loginFrom").submit();
-    			//location="https://www.baidu.com?userName="+oldName+"&passWord="+oldPass;//添加退出当前账号功能
-    		}else{
-    			$("#check2").prop('checked',false);
-    		}
-    		/*拿到刚刚注册的账号*/
-    		/*if(localStorage.getItem("name")!=null){
-    			$("#login-username").val(localStorage.getItem("name"));
-    		}*/
-    		/*登录*/
-    		$("#login").click(function(){
-    		    // alert("abc");
-    			var userName=$("#login-username").val();
-    			var passWord=$("#login-password").val();
-    			// /*获取当前输入的账号密码*/
-    			localStorage.setItem("userName",userName)
-    			localStorage.setItem("passWord",passWord)
-    			/*获取记住密码  自动登录的 checkbox的值*/
-    			var check1 = $("#check1").prop('checked');
-	    		var check2 = $('#check2').prop('checked');
-	    		localStorage.setItem("check1",check1);
-	    		localStorage.setItem("check2",check2);
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>网站模板</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/basis.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+    <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/respond.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/jquery.sidr.min.js"></script>
+    <!--[if lt IE 9]>
+	<script src="../js/html5shiv.min.js"></script>
+	<script src="../js/respond.min.js"></script>
+    <![endif]-->
+	</head>
+	<body>
+		<header>
+			<div class="top-box">
+				<div class="container">
+					<div class="nav-box clearfix">
+						<h1 class="fl logo">
+							电影系统推荐
+						</h1>
+						<nav class="fr">
+							<ul class="nav-list clearfix">
+								<li class="dq"><a href="index.html">首页</a></li>
+								<li><a href="login.html">登陆</a></li>
+							</ul>
+						</nav>
+					</div>
+					
+				</div>
+			</div>
+		</header>
+	    <section>
+		   	<div class="box2">
+		   		<div class="container">
+		   			<div id="show_film" class="title-01">
+			    		<h2>电影展示</h2>
+		    		</div>
+	   				<ul id="movies_description" class="row clearfix sy-allist">
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l1_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l1_2"> xxx 电影</h3>
+								<div id="l1_3">发布时间</div>
+								<div id="l1_4">导演</div>
+								<div id="l1_5">主演</div>
+								<div id="l1_6">评分</div>
+								<div id="l1_7">位置</div>
+								<div id="l1_8">描述</div>
+								<div id="l1_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l2_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l2_2"> xxx 电影</h3>
+								<div id="l2_3">发布时间</div>
+								<div id="l2_4">导演</div>
+								<div id="l2_5">主演</div>
+								<div id="l2_6">评分</div>
+								<div id="l2_7">位置</div>
+								<div id="l2_8">描述</div>
+								<div id="l2_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l3_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l3_2"> xxx 电影</h3>
+								<div id="l3_3">发布时间</div>
+								<div id="l3_4">导演</div>
+								<div id="l3_5">主演</div>
+								<div id="l3_6">评分</div>
+								<div id="l3_7">位置</div>
+								<div id="l3_8">描述</div>
+								<div id="l3_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l4_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l4_2"> xxx 电影</h3>
+								<div id="l4_3">发布时间</div>
+								<div id="l4_4">导演</div>
+								<div id="l4_5">主演</div>
+								<div id="l4_6">评分</div>
+								<div id="l4_7">位置</div>
+								<div id="l4_8">描述</div>
+								<div id="l4_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l5_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l5_2"> xxx 电影</h3>
+								<div id="l5_3">发布时间</div>
+								<div id="l5_4">导演</div>
+								<div id="l5_5">主演</div>
+								<div id="l5_6">评分</div>
+								<div id="l5_7">位置</div>
+								<div id="l5_8">描述</div>
+								<div id="l5_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l6_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l6_2"> xxx 电影</h3>
+								<div id="l6_3">发布时间</div>
+								<div id="l6_4">导演</div>
+								<div id="l6_5">主演</div>
+								<div id="l6_6">评分</div>
+								<div id="l6_7">位置</div>
+								<div id="l6_8">描述</div>
+								<div id="l6_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l7_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l7_2"> xxx 电影</h3>
+								<div id="l7_3">发布时间</div>
+								<div id="l7_4">导演</div>
+								<div id="l7_5">主演</div>
+								<div id="l7_6">评分</div>
+								<div id="l7_7">位置</div>
+								<div id="l7_8">描述</div>
+								<div id="l7_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l8_1" src="../img/abt-bg.jpg"/>
+								<h3 id="l8_2"> xxx 电影</h3>
+								<div id="l8_3">发布时间</div>
+								<div id="l8_4">导演</div>
+								<div id="l8_5">主演</div>
+								<div id="l8_6">评分</div>
+								<div id="l8_7">位置</div>
+								<div id="l8_8">描述</div>
+								<div id="l8_9">类型</div>
+							</div>
+						</li>
+	   				</ul>
+		   		</div>
+		   	</div>
+		</section>
+		<footer>
+			<div class="foot-box">
+				<div class="container clearfix">
+					<div class="fl foot-fq">
+						<p>版权所有：xxxxxx</p>
+						<p>地 址 ：xxxxxx  </p>
+						<p>总 机 ：12345678</p>
+					</div>
+					<div class="fr foot-fq">
+						<p>官方微信: xxxxxx</p>
+						<p>官方QQ: xxxxxx</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	<script>
+        $(function(){
+            /*判断上次是否勾选记住密码和自动登录*/
+            var userId = localStorage.getItem("userId");
+
+            function newajax() {
                 $.ajax({
                     type:"get",
-                    url:"http://localhost:10086/start/login?username="+ userName + "&pswd=" + passWord,
-                    // data:{"username":userName,"pswd":passWord},
+                    async: false,
+                    url: "http://localhost:10086/rec/ramdomMovies",
+                    dataType: 'json',
+                    success: function(res){
+						var movies = res.data;
+                        for(var i=0;i< 8;i++){
+                            localStorage.setItem("l" + (i+1) + "_movieid",movies[i].movieid);
+                            $("#l" + (i+1) + "_1").attr('src',movies[i].picture);
+                            $("#l" + (i+1) + "_2").html(movies[i].moviename);
+                            $("#l" + (i+1) + "_3").html("发布时间：" +movies[i].releasetime.slice(0,10));
+                            $("#l" + (i+1) + "_4").html("导演：" +movies[i].director);
+                            $("#l" + (i+1) + "_5").html("主演：" +movies[i].leadactors.slice(0,30) + "...");
+                            $("#l" + (i+1) + "_6").html("评分：" +movies[i].averating);
+                            $("#l" + (i+1) + "_7").html("位置：" +movies[i].numrating);
+                            $("#l" + (i+1) + "_8").html("描述：" +movies[i].description.slice(0,100) + "...");
+                            $("#l" + (i+1) + "_9").html("类型：" +movies[i].typelist);
+
+                            $("#l" + (i+1) + "_input").attr('value',0);
+                        }
+                    },
+                    error: function () {
+                        alert("获取失败")
+                    }
+                });
+            }
+            // //放入页面的容器显示
+            newajax();
+
+            $("#l8_button").click(function(){
+                // alert("abc");
+				var movieid = localStorage.getItem("l8_movieid");
+                var userid = localStorage.getItem("userid");
+                var rating=$("#l8_input").val();
+
+                alert(movieid + ":" + userid + ":" + rating);
+
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:10086/start/login?userId="+ userid,
+                    data:[{"movieId":movieid,"score":rating}],
                     // async:true,
                     dataType: 'json',
                     success: function(res){
-                        alert("ok");
                         alert(res);
-                        location="admin.html"
-                        localStorage.setItem("userId",1);
+                        // location="index.html"
                     },
-                    error: function (XMLHttpRequest, textStatus, thrownError) {
+                    error: function () {
                         alert("error");
-                        localStorage.setItem("userId",1);
-                        location="admin.html"
-
                     }
                 });
 
 
-    		})
-    	})
-    </script>
-  </body>
+            })
+
+
+        })
+	</script>
+	
+	</body>
 </html>
