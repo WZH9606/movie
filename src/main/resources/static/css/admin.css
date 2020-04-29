@@ -1,0 +1,13 @@
+.admin_img {
+    width: 100%;
+}
+
+.rating_input {
+    width: 50%;
+    border: 1px solid darkgrey;
+    margin-right: 5px !important;
+}
+.rating_button {
+    width: 20%;
+    right: 0 !important;
+}

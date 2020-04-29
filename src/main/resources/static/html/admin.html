@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>网站模板</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/basis.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+    <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/respond.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/jquery.sidr.min.js"></script>
+    <!--[if lt IE 9]>
+	<script src="../js/html5shiv.min.js"></script>
+	<script src="../js/respond.min.js"></script>
+    <![endif]-->
+	</head>
+	<body>
+		<header>
+			<div class="top-box">
+				<div class="container">
+					<div class="nav-box clearfix">
+						<h1 class="fl logo">
+							电影系统推荐
+						</h1>
+						<nav class="fr">
+							<ul class="nav-list clearfix">
+								<li class="dq"><a href="admin.html">首页</a></li>
+								<li><a href="recommand.html">电影推荐</a></li>
+								<li><a href="index.html">退出</a></li>
+							</ul>
+						</nav>
+					</div>
+					
+				</div>
+			</div>
+		</header>
+	    <section>
+		   	<div class="box2">
+		   		<div class="container">
+		   			<div id="show_film" class="title-01">
+			    		<h2>电影展示</h2>
+		    		</div>
+	   				<ul id="movies_description" class="row clearfix sy-allist">
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l1_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l1_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l1_2"> xxx 电影</h3>
+								<div id="l1_3">发布时间</div>
+								<div id="l1_4">导演</div>
+								<div id="l1_5">主演</div>
+								<div id="l1_6">评分</div>
+								<div id="l1_7">位置</div>
+								<div id="l1_8">描述</div>
+								<div id="l1_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l2_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l2_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l2_2"> xxx 电影</h3>
+								<div id="l2_3">发布时间</div>
+								<div id="l2_4">导演</div>
+								<div id="l2_5">主演</div>
+								<div id="l2_6">评分</div>
+								<div id="l2_7">位置</div>
+								<div id="l2_8">描述</div>
+								<div id="l2_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l3_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l3_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l3_2"> xxx 电影</h3>
+								<div id="l3_3">发布时间</div>
+								<div id="l3_4">导演</div>
+								<div id="l3_5">主演</div>
+								<div id="l3_6">评分</div>
+								<div id="l3_7">位置</div>
+								<div id="l3_8">描述</div>
+								<div id="l3_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l4_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l4_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l4_2"> xxx 电影</h3>
+								<div id="l4_3">发布时间</div>
+								<div id="l4_4">导演</div>
+								<div id="l4_5">主演</div>
+								<div id="l4_6">评分</div>
+								<div id="l4_7">位置</div>
+								<div id="l4_8">描述</div>
+								<div id="l4_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l5_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l5_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l5_2"> xxx 电影</h3>
+								<div id="l5_3">发布时间</div>
+								<div id="l5_4">导演</div>
+								<div id="l5_5">主演</div>
+								<div id="l5_6">评分</div>
+								<div id="l5_7">位置</div>
+								<div id="l5_8">描述</div>
+								<div id="l5_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l6_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l6_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l6_2"> xxx 电影</h3>
+								<div id="l6_3">发布时间</div>
+								<div id="l6_4">导演</div>
+								<div id="l6_5">主演</div>
+								<div id="l6_6">评分</div>
+								<div id="l6_7">位置</div>
+								<div id="l6_8">描述</div>
+								<div id="l6_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l7_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input value="3" id="l7_input" class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l7_2"> xxx 电影</h3>
+								<div id="l7_3">发布时间</div>
+								<div id="l7_4">导演</div>
+								<div id="l7_5">主演</div>
+								<div id="l7_6">评分</div>
+								<div id="l7_7">位置</div>
+								<div id="l7_8">描述</div>
+								<div id="l7_9">类型</div>
+							</div>
+						</li>
+						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<div class="sy-albox">
+								<img class="admin_img" id="l8_1" src="../img/abt-bg.jpg"/>
+								<div>个人评分：<input id="l8_input" class="rating_input"/><button id="l8_button" class="btn btn-sm" type="submit">确定</button></div>
+								<h3 id="l8_2"> xxx 电影</h3>
+								<div id="l8_3">发布时间</div>
+								<div id="l8_4">导演</div>
+								<div id="l8_5">主演</div>
+								<div id="l8_6">评分</div>
+								<div id="l8_7">位置</div>
+								<div id="l8_8">描述</div>
+								<div id="l8_9">类型</div>
+							</div>
+						</li>
+	   				</ul>
+		   		</div>
+		   	</div>
+		</section>
+		<footer>
+			<div class="foot-box">
+				<div class="container clearfix">
+					<div class="fl foot-fq">
+						<p>版权所有：xxxxxx</p>
+						<p>地 址 ：xxxxxx  </p>
+						<p>总 机 ：12345678</p>
+					</div>
+					<div class="fr foot-fq">
+						<p>官方微信: xxxxxx</p>
+						<p>官方QQ: xxxxxx</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	<script>
+        $(function(){
+            /*判断上次是否勾选记住密码和自动登录*/
+            var userId = localStorage.getItem("userId");
+
+
+            function newajax() {
+                $.ajax({
+                    type:"get",
+                    // cache: false,
+                    // async: false,
+                    url:"http://localhost:10086/rec/AllMoviesByPage",
+                    // data:{"username":userName,"pswd":passWord},
+                    // dataType: 'json',
+                    success: function(res){
+                        alert("ok");
+                    },
+                    error: function (XMLHttpRequest, textStatus, thrownError) {
+                        // var str = '';
+                        var movies = [{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        },{
+                            movieid: 1,
+                            moviename: "Toy Story",
+                            releasetime: "1995-10-30",
+                            director: "John Lasseter",
+                            leadactors: "Tom Hanks,Tim Allen,Don Rickles,Jim Varney,Wallace Shawn,John Ratzenberger,Annie Potts,John Morris,Erik von Detten,Laurie Metcalf,R. Lee Ermey,Sarah Freeman,Penn Jillette,Sherry Lynn",
+                            picture: "http://image.tmdb.org/t/p/w185/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                            averating: "3.9",
+                            numrating: "67537",
+                            description: "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.",
+                            typelist: "Animation,Comedy,Family"
+                        }];
+                        // $("#l2_2").html("abc");
+                        for(var i=0;i< 8;i++){
+                            localStorage.setItem("l" + (i+1) + "_movieid",movies[i].movieid);
+
+                            $("#l" + (i+1) + "_1").attr('src',movies[i].picture);
+                            $("#l" + (i+1) + "_2").html(movies[i].moviename);
+                            $("#l" + (i+1) + "_3").html(movies[i].releasetime);
+                            $("#l" + (i+1) + "_4").html(movies[i].director);
+                            $("#l" + (i+1) + "_5").html(movies[i].leadactors);
+                            $("#l" + (i+1) + "_6").html(movies[i].averating);
+                            $("#l" + (i+1) + "_7").html(movies[i].numrating);
+                            $("#l" + (i+1) + "_8").html(movies[i].description);
+                            $("#l" + (i+1) + "_9").html(movies[i].typelist);
+
+                            $("#l" + (i+1) + "_input").attr('value',0);
+
+
+                            // str += '<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">'+
+                            //     '<div class="sy-albox">'+
+                            //     '<img class="admin_img" src=' + movies[i].picture + '>' +
+                            //     '<h3>'+ movies[i].moviename +'(点击名称评分)</h3>'+
+                            //     '<div>评分：<input class="rating_input"/><button onclick="rating_onclick" class="btn btn-sm" type="submit">确定</button></div>'+
+                            //     '<div>发布时间：'+ movies[i].releasetime +'</div>'+
+                            //     '<div>导演：'+ movies[i].director +'</div>'+
+                            //     '<div >主演：'+ movies[i].leadactors +'</div>'+
+                            //     '<div>评分：'+ movies[i].averating +'</div>'+
+                            //     '<div>位置：'+ movies[i].numrating +'</div>'+
+                            //     '<div>描述：'+ movies[i].description +'</div>'+
+                            //     '<div>类型：'+ movies[i].typelist +'</div>'+
+                            //     '</div>'+
+                            //     '</li>';
+                        }
+                        // $('#movies_description').html(str);
+                    }
+                });
+            }
+            // //放入页面的容器显示
+            newajax();
+
+            $("#l8_button").click(function(){
+                // alert("abc");
+				var movieid = localStorage.getItem("l8_movieid");
+                var userid = localStorage.getItem("userid");
+                var rating=$("#l8_input").val();
+
+                alert(movieid + ":" + userid + ":" + rating);
+
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:10086/start/login?userId="+ userid,
+                    data:[{"movieId":movieid,"score":rating}],
+                    // async:true,
+                    dataType: 'json',
+                    success: function(res){
+                        alert("ok");
+                        // location="admin.html"
+                    },
+                    error: function (XMLHttpRequest, textStatus, thrownError) {
+                        alert("error");
+                        // $("#l8_input").val(rating);
+
+                    }
+                });
+
+
+            })
+
+
+        })
+	</script>
+	
+	</body>
+</html>
