@@ -117,7 +117,20 @@
     			if(flagName&&flagPas&&flagPass){
     				localStorage.setItem("name",name);
     				localStorage.setItem("passWord",passWord);
-    				location="index.html"
+                    $.ajax({
+                        type:"post",
+                        url: "http://localhost:10086/start/signUp",
+                        data:{"username":name,"pswd1":passWord,"pswd2":passWord},
+                        async:false,
+                        dataType: 'json',
+                        success: function(res){
+                            alert("注册成功")
+                            location="login.html"
+                        },
+                        error: function () {
+                            alert("注册失败")
+                        }
+                    });
     			}else{
     				if(!flagName){
     					$("#register-username").addClass("form-control is-invalid");
