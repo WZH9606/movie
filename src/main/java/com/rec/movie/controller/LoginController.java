@@ -7,6 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/start")
 public class LoginController {
@@ -16,8 +19,8 @@ public class LoginController {
     @PostMapping("login")
     @ApiOperation("登录")
     public Result login(@RequestParam String username, @RequestParam String pswd){
-        String ans = loginService.login(username,pswd);
-        if(!ans.equals("登录成功")){
+        Map ans = loginService.login(username,pswd);
+        if(ans.containsKey("失败原因")){
             return new Result().fail(ans);
         }
         return new Result().success(ans);
