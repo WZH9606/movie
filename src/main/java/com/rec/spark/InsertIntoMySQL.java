@@ -1,3 +1,4 @@
+/*
 package com.rec.spark;
 
 import org.apache.spark.SparkConf;
@@ -59,3 +60,4 @@ public class InsertIntoMySQL implements MySqlConnect,Serializable {
     }
 }
 
+*/

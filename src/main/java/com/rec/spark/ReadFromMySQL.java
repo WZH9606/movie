@@ -1,3 +1,4 @@
+/*
 
 package com.rec.spark;
 
@@ -43,3 +44,4 @@ public class ReadFromMySQL implements MySqlConnect ,Serializable {
     }
 }
 
+*/
