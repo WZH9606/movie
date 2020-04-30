@@ -237,7 +237,7 @@ public class MovieLensALS implements Serializable {
             public Double call(Rating rating) throws Exception {
                 return rating.rating();
             }
-        }, true, 1).take(10);
+        }, false, 1).take(10);
         List<String> rddForMySQL = new ArrayList<>();
         for (int i = 0; i < takeRDD.size(); i++) {
             Rating r = takeRDD.get(i);
