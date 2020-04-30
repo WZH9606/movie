@@ -1,4 +1,4 @@
-/*
+
 
 package com.rec.spark;
 
@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class ReadFromMySQL implements MySqlConnect ,Serializable {
 
     public static JavaRDD<String> read(int userId,JavaSparkContext sc) {
+        System.out.println("进入 ReadFromMySQL");
         SQLContext sqlContext = new SQLContext(sc);
 
         Dataset<Row> personalRatingsDF = sqlContext.read().format("jdbc").
@@ -39,9 +40,10 @@ public class ReadFromMySQL implements MySqlConnect ,Serializable {
                 return r.get(1).toString() + "::" + r.get(2).toString() + "::" + r.get(3).toString() + "::" + r.get(4).toString();
             }
         });
+        System.out.println("退出 ReadFromMySQL");
 
         return myrdd;
     }
 }
 
-*/
+

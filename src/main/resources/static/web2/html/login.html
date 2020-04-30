@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Material Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
+  </head>
+  <body>
+    <div class="page login-page">
+      <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+          <div class="row">
+            <!-- Logo & Information Panel-->
+            <div class="col-lg-6">
+              <div class="info d-flex align-items-center">
+                <div class="content">
+                  <div class="logo">
+                    <h1>欢迎登录</h1>
+                  </div>
+                  <p>电影推荐系统</p>
+                </div>
+              </div>
+            </div>
+            <!-- Form Panel    -->
+            <div class="col-lg-6 bg-white">
+              <div class="form d-flex align-items-center">
+                <div class="content">
+                  <div class="form-group">
+                    <input id="login-username" type="text" name="userName" required data-msg="请输入用户名" placeholder="用户名" value="admin" class="input-material">
+                  </div>
+                  <div class="form-group">
+                    <input id="login-password" type="password" name="passWord" required data-msg="请输入密码" placeholder="密码" class="input-material">
+                  </div>
+                  <button id="login" type="submit" class="btn btn-primary">登录</button>
+                  <br />
+                  <small>没有账号?</small><a href="register.html" class="signup">&nbsp;注册</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.10.2/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.10.2/dist/jquery.validate.min.js"></script>
+    <script>
+    	$(function(){
+    		/*登录*/
+    		$("#login").click(function(){
+    		    // alert("abc");
+    			var userName=$("#login-username").val();
+    			var passWord=$("#login-password").val();
+    			// /*获取当前输入的账号密码*/
+    			localStorage.setItem("userName",userName)
+    			localStorage.setItem("passWord",passWord)
+                $.ajax({
+                    type:"post",
+                    url:"http://localhost:10086/start/login",
+                    data:{"username":userName,"pswd":passWord},
+                    async:false,
+                    dataType: 'json',
+                    success: function(res){
+                        alert("登陆成功");
+                        if (res.data.userType == "老用户") {
+                            location="old_recommand.html";
+                            localStorage.setItem("userId",res.data.userId);
+                        } else {
+                            location="new_recommand.html";
+                            localStorage.setItem("userId",res.data.userId);
+                        }
+                    },
+                    error: function () {
+                        alert("登陆失败");
+
+                    }
+                });
+
+
+    		})
+    	})
+    </script>
+  </body>
+</html>

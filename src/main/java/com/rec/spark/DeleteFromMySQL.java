@@ -1,4 +1,4 @@
-/*
+
 package com.rec.spark;
 
 import java.sql.Connection;
@@ -15,7 +15,7 @@ public class DeleteFromMySQL implements MySqlConnect {
         prop.setProperty("user", MySqlConnect.user);
         prop.setProperty("password", MySqlConnect.password);
 
-        String sql = "delete from recommendresult where userid=" + userId;
+        String sql = "delete from recommendresult where userid=" + userId + " and moviename <> 'admin'";
         Connection conn = DriverManager.getConnection(MySqlConnect.url, prop);
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.executeUpdate();
@@ -26,7 +26,7 @@ public class DeleteFromMySQL implements MySqlConnect {
         if (conn.equals(null)) {
             conn.close();
         }
+        System.out.println("退出 DeleteFromMySQL");
     }
 }
 
-*/

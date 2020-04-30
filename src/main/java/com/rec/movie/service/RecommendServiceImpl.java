@@ -9,9 +9,11 @@ import com.rec.movie.mapper.MovieinfoMapper;
 import com.rec.movie.mapper.PersonalratingsMapper;
 import com.rec.movie.mapper.RecommendresultMapper;
 import com.rec.movie.mapper.UserMapper;
+import com.rec.spark.MovieLensALS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,15 +56,19 @@ public class RecommendServiceImpl implements RecommendService {
             public void run() {
                 //调用你的函数
                 try {
-                    Thread.sleep(3000);
+//                    Thread.sleep(3000);
+                    MovieLensALS.Movie_ALS(userid);
+                    QueryWrapper<Recommendresult> byUserIdByName = new QueryWrapper<>();
+                    byUserIdByName.eq("userid",userid).eq("moviename","admin");
+                    recommendresultMapper.delete(byUserIdByName);
                     System.out.println("线程结束");
-                } catch (InterruptedException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         };
         //并行执行，不影响打分，打分之后直接返回
-        Thread callScale = new Thread(doALS);
+        Thread callScale = new Thread(null,doALS,"thread-1",2048204860);
         callScale.start();
         for(int i=0;i<8;i++) {
             Recommendresult temp = new Recommendresult();

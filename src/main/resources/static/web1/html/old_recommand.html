@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>网站模板</title>
+    <title>电影推荐</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/swiper.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/basis.css"/>
@@ -14,9 +14,9 @@
     <script src="../js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/jquery.sidr.min.js"></script>
     <!--[if lt IE 9]>
-	<script src="../js/html5shiv.min.js"></script>
-	<script src="../js/respond.min.js"></script>
-    <![endif]-->
+		<script src="../js/html5shiv.min.js"></script>
+		<script src="../js/respond.min.js"></script>
+		<![endif]-->
 	</head>
 	<body>
 		<header>
@@ -45,7 +45,7 @@
 		   			<div id="show_film" class="title-01">
 			    		<h2>电影推荐</h2>
 		    		</div>
-	   				<ul id="movies_description" class="row clearfix sy-allist">
+	   				<ul id="movies_description" class="row clearfix sy-allist sy-allist-oldheiglt">
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
 								<img class="admin_img" id="l1_1" src="../img/abt-bg.jpg"/>
@@ -190,7 +190,7 @@
                             $("#l" + (i+1) + "_1").attr('src',movies[i].picture);
                             $("#l" + (i+1) + "_2").html(movies[i].moviename);
                             $("#l" + (i+1) + "_3").html("发布时间：" +movies[i].releasetime.slice(0,10));
-                            $("#l" + (i+1) + "_4").html("导演：" +movies[i].director);
+                            $("#l" + (i+1) + "_4").html("导演：" +movies[i].director.slice(0,30) + "...");
                             $("#l" + (i+1) + "_5").html("主演：" +movies[i].leadactors.slice(0,30) + "...");
                             $("#l" + (i+1) + "_6").html("评分：" +movies[i].averating);
                             $("#l" + (i+1) + "_7").html("位置：" +movies[i].numrating);

@@ -1,4 +1,4 @@
-/*
+
 
 package com.rec.spark;
 
@@ -15,6 +15,7 @@ import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.mllib.recommendation.ALS;
 import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
 import org.apache.spark.mllib.recommendation.Rating;
+import org.apache.spark.storage.StorageLevel;
 import scala.Tuple2;
 
 import java.io.Serializable;
@@ -112,7 +113,7 @@ public class MovieLensALS implements Serializable {
 
     public void movieLensALS(String movieLensHomeDir, int userId) throws SQLException {
         // 设置运行环境
-        SparkConf conf = new SparkConf().setAppName("MovieLensALS").setMaster("local[1]");
+        SparkConf conf = new SparkConf().setAppName("MovieLensALS").setMaster("local");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         Broadcast<Integer> bcUserid = sc.broadcast(userId);
@@ -125,7 +126,6 @@ public class MovieLensALS implements Serializable {
 
         JavaRDD<Rating> myRatings = loadRatings(personalRatingsLines);
         JavaRDD<Rating> myRatingsRDD = sc.parallelize(myRatings.collect(),1);
-
         // 装载样本评分数据，其中最后一列Timestamp取除10的余数作为key，Rating为值,即(Int,Rating)
         // ratings.dat原始数据：用户编号、电影编号、评分、评分时间戳
         JavaPairRDD<Long, Rating> ratings = sc.textFile(movieLensHomeDir + "ratings.dat", 1)
@@ -139,18 +139,9 @@ public class MovieLensALS implements Serializable {
                                 Double.parseDouble(fields[2])
                         ));
                     }
-                });
-
+                }).persist(StorageLevel.MEMORY_AND_DISK());
         // 装载电影目录对照表 （电影 ID -> 电影标题）
         //movies.dat原始数据：电影编号、电影名称、电影类别
-//        JavaPairRDD<Integer, String> movies = sc.textFile(movieLensHomeDir + "movies.dat", 1)
-//                .mapToPair(new PairFunction<String, Integer, String>() {
-//                    @Override
-//                    public Tuple2<Integer, String> call(String s) throws Exception {
-//                        String[] fields = s.split("::");
-//                        return new Tuple2<>(Integer.parseInt(fields[0]), fields[1]);
-//                    }
-//                });
         JavaPairRDD<Integer, String> movies = sc.textFile(movieLensHomeDir + "movies.dat", 1)
                 .mapToPair(new PairFunction<String, Integer, String>() {
                     @Override
@@ -158,27 +149,11 @@ public class MovieLensALS implements Serializable {
                         String[] fields = s.split("::");
                         return new Tuple2<>(Integer.parseInt(fields[0]), fields[1]);
                     }
-                });
-
-        long numRatings = ratings.count();
-
-        long numUsers = ratings.map(new Function<Tuple2<Long, Rating>, Integer>() {
-            @Override
-            public Integer call(Tuple2<Long, Rating> t) throws Exception {
-                return t._2.user();
-            }
-        }).distinct().count();
-
-        long numMovies = ratings.map(new Function<Tuple2<Long, Rating>, Integer>() {
-            @Override
-            public Integer call(Tuple2<Long, Rating> t) throws Exception {
-                return t._2.product();
-            }
-        }).distinct().count();
+                }).persist(StorageLevel.MEMORY_AND_DISK());
 
         // 将样本评分表以key值切分成3个部分，分别用于训练 (60%，并加入用户评分), 校验 (20%), and 测试 (20%)
         // 该数据在计算过程中要多次应用到，所以cache到内存
-        Integer numPartitions = 4;
+        Integer numPartitions = 1;
 
         // training训练样本数据
         JavaRDD<Rating> training = ratings.filter(new Function<Tuple2<Long, Rating>, Boolean>() {
@@ -186,15 +161,14 @@ public class MovieLensALS implements Serializable {
             public Boolean call(Tuple2<Long, Rating> t) throws Exception {
                 return t._1 < 6; //取评分时间除10的余数后值小于6的作为训练样本
             }
-        }).values().union(myRatingsRDD).repartition(numPartitions).cache();
-
+        }).values().union(myRatingsRDD).repartition(numPartitions).persist(StorageLevel.MEMORY_AND_DISK());
         // validation校验样本数据
         JavaRDD<Rating> validation = ratings.filter(new Function<Tuple2<Long, Rating>, Boolean>() {
             @Override
             public Boolean call(Tuple2<Long, Rating> t) throws Exception {
                 return t._1 >= 6 && t._1 < 8;
             }
-        }).values().repartition(numPartitions).cache();
+        }).values().repartition(numPartitions).persist(StorageLevel.MEMORY_AND_DISK());
 
 
         // test测试样本数据
@@ -203,25 +177,17 @@ public class MovieLensALS implements Serializable {
             public Boolean call(Tuple2<Long, Rating> t) throws Exception {
                 return t._1 >= 8;
             }
-        }).values().cache();
+        }).values().persist(StorageLevel.MEMORY_AND_DISK());
 
-        long numTraining = training.count();
         long numValidation = validation.count();
-        long numTest = test.count();
 
         // 训练不同参数下的模型，并在校验集中验证，获取最佳参数下的模型
         int[] ranks = new int[]{8, 12}; //模型中隐语义因子的个数
         double[] lambdas = new double[]{0.1, 10.0}; //是ALS的正则化参数
-        int[] numIters = new int[]{10, 20}; //迭代次数
-
-
-        //var bestModel: Option[MatrixFactorizationModel] = None //最好的模型
+        int[] numIters = new int[]{5}; //迭代次数
 
         MatrixFactorizationModel bestModel = null;
         double bestValidationRmse = Double.MAX_VALUE;
-        int bestRank = 0;  //最好的隐语义因子的个数
-        double bestLambda = 0.0; //最好的ALS正则化参数
-        int bestNumIter = 0; //最好的迭代次数
 
         for (int i = 0; i < ranks.length; i++) {
             int rank = ranks[i];
@@ -237,42 +203,18 @@ public class MovieLensALS implements Serializable {
                     if (validationRmse < bestValidationRmse) {
                         bestModel = model;
                         bestValidationRmse = validationRmse;
-                        bestRank = rank;
-                        bestLambda = lambda;
-                        bestNumIter = numIter;
                     }
 
                 }
             }
         }
-        // 用最佳模型预测测试集的评分，并计算和实际评分之间的均方根误差
-        Double testRmse = computeRmse(bestModel, test, numTest);
-
-        //创建一个naive基线和最好的模型比较
-        Double meanRating = mean(training.union(validation).map(new Function<Rating, Double>() {
-            @Override
-            public Double call(Rating rating) throws Exception {
-                return rating.rating();
-            }
-        }).collect());
-        Broadcast<Double> bcMeanRating = sc.broadcast(meanRating);
-
-        double baselineRmse = Math.sqrt(mean(test.map(new Function<Rating, Double>() {
-            @Override
-            public Double call(Rating rating) throws Exception {
-                return (bcMeanRating.getValue() - rating.rating()) * (bcMeanRating.getValue() - rating.rating());
-            }
-        }).collect()));
-        //提高了基线的最佳模型
-        double improvement = (baselineRmse - testRmse) / baselineRmse * 100;
-
         // 推荐前5部最感兴趣的电影，注意要剔除用户已经评分的电影
         JavaRDD<Integer> myRatedMovieIds = myRatings.map(new Function<Rating, Integer>() {
             @Override
             public Integer call(Rating rating) throws Exception {
                 return rating.product();
             }
-        });
+        }).persist(StorageLevel.MEMORY_AND_DISK());
 
         Set<Integer> myRatedMoviesIdsSet = new HashSet<>(myRatedMovieIds.collect());
         Broadcast<Set<Integer>> bcMyRatedMoviesIdsSet = sc.broadcast(myRatedMoviesIdsSet);
@@ -283,7 +225,7 @@ public class MovieLensALS implements Serializable {
             public Boolean call(Tuple2<Integer, String> t) throws Exception {
                 return !bcMyRatedMoviesIdsSet.getValue().contains(t._1);
             }
-        }).keys();
+        }).keys().persist(StorageLevel.MEMORY_AND_DISK());
 
         List<Rating> takeRDD = bestModel.predict(candidates.mapToPair(new PairFunction<Integer, Integer, Integer>() {
             @Override
@@ -316,12 +258,22 @@ public class MovieLensALS implements Serializable {
 
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void Movie_ALS(int userid) throws SQLException {
 
         Logger.getLogger("org.apache.spark").setLevel(Level.ERROR);
         Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF);
-        String movieLensHomeDir = "./Files/";
-        int userid = 1;
+        String movieLensHomeDir = "./src/main/java/com/rec/spark/Files/";
+        MovieLensALS movieLensALS = new MovieLensALS();
+
+        movieLensALS.movieLensALS(movieLensHomeDir, userid);
+    }
+
+    public static void main(String[] args) throws SQLException {
+        Logger.getLogger("org.apache.spark").setLevel(Level.ERROR);
+        Logger.getLogger("org.eclipse.jetty.server").setLevel(Level.OFF);
+        String movieLensHomeDir = "./src/main/java/com/rec/spark/Files/";
+//        String movieLensHomeDir = "/Users/fang/Documents/3_科研/2_项目/movie/movie/src/main/java/com/rec/spark/Files/";
+        int userid = 2;
         MovieLensALS movieLensALS = new MovieLensALS();
 
         movieLensALS.movieLensALS(movieLensHomeDir, userid);
@@ -330,4 +282,4 @@ public class MovieLensALS implements Serializable {
 
 }
 
-*/
+

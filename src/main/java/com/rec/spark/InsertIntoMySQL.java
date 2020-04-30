@@ -1,4 +1,4 @@
-/*
+
 package com.rec.spark;
 
 import org.apache.spark.SparkConf;
@@ -18,7 +18,7 @@ import java.util.Properties;
 public class InsertIntoMySQL implements MySqlConnect,Serializable {
 
     public static void insert(List<String>array, JavaSparkContext sc){
-
+        System.out.println("进入 InsertIntoMySQL");
         SQLContext sqlContext = new SQLContext(sc);
 
         JavaRDD<String[]> movieRDD = sc.parallelize(array).map(
@@ -57,7 +57,8 @@ public class InsertIntoMySQL implements MySqlConnect,Serializable {
         prop.put("driver",MySqlConnect.driver);
 
         movieDF.write().mode("append").jdbc(MySqlConnect.url,"movierecommend.recommendresult",prop);
+        System.out.println("退出 InsertIntoMySQL");
     }
 }
 
-*/
+

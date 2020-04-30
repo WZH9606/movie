@@ -1,4 +1,4 @@
-/*
+
 package com.rec.spark;
 
 public interface MySqlConnect {
@@ -13,4 +13,4 @@ public interface MySqlConnect {
 
     static String driver = "com.mysql.cj.jdbc.Driver";
 }
-*/
+
