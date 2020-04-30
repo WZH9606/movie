@@ -68,12 +68,33 @@ html { overflow-y: scroll; min-width: 320px;}
 .clearfix{*zoom:1;}
 .mt20{ margin-top: 20px;}
 
+.line_meun {
+	width: 150px;
+	height: 1650px !important;
+	background-color: #181818;
+}
+.line_meun_new {
+	width: 150px;
+	height: 1850px !important;
+	background-color: #181818;
+}
+.line_list {
+	height: 40px; line-height: 40px; color: #fff; font-size: 20px;
+}
+.line_list li a{
+	padding-left: 30px;
+	color: white;
+	/*padding: 20px 11px; */
+	display: block; height: 80px; line-height: 80px; font-size: 20px; border-bottom: 3px deepskyblue solid;}
+
+
+
 .nav-box{height: 50px;}
 .nav-box .logo img{height: 50px; display: inline-block; margin-right: 10px;}
-.nav-box .logo{ line-height: 50px; color: deepskyblue; font-size: 22px; height: 50px; overflow: hidden;}
+.nav-box .logo{ line-height: 50px; color: white; font-size: 22px; height: 50px; overflow: hidden;}
 .nav-ico{ display: block;}
 .nav-ico img{ height: 40px; display: block; margin-top: 5px;}
-.top-box{background: gainsboro;box-shadow: 0 3px 5px deepskyblue; position: relative; z-index: 100;}
+.top-box{background: #181818;box-shadow: 0 3px 5px deepskyblue; position: relative; z-index: 100;}
 .nav-box nav{ display: none;}
 .nav-list li{ float: left; height: 50px; line-height: 50px; color: #fff; font-size: 16px;}
 .nav-list li a{ color: black; padding: 0 11px; display: block; height: 47px; line-height: 47px; border-top: 3px #333 solid;}
@@ -96,7 +117,7 @@ html { overflow-y: scroll; min-width: 320px;}
 
 .sy-hxtxt1 li h3{ text-align: center; font-size: 20px; margin-bottom: 10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .sy-hxtxt1 li p{ height: 48px; overflow: hidden;}
-.box2{ background: #f1f2f6;}
+.box2{ background: #f1f2f6; display: flex}
 .sy-allist-oldheiglt li{ height: 500px !important;}
 .sy-allist-newheiglt li{ height: 550px !important;}
 .sy-allist li{ padding: 0 10px; margin-bottom: 20px;}

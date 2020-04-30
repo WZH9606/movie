@@ -15,25 +15,18 @@
   <body>
     <div class="page login-page">
       <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow">
+        <div class="form-holder has-shadow padLeft">
           <div class="row">
             <!-- Logo & Information Panel-->
-            <div class="col-lg-6">
-              <div class="info d-flex align-items-center">
-                <div class="content">
-                  <div class="logo">
-                    <h1>欢迎注册</h1>
-                  </div>
-                  <p>电影推荐系统</p>
-                </div>
-              </div>
-            </div>
             <!-- Form Panel    -->
-            <div class="col-lg-6 bg-white">
+            <div class="col-lg-8 bg-white">
               <div class="form d-flex align-items-center">
                 <div class="content">
+                  <div class="name-group">
+                    用户注册
+                  </div>
                     <div class="form-group">
-                      <input id="register-username" class="input-material" type="text" name="registerUsername" placeholder="请输入用户名/姓名" >
+                      <input id="register-username" class="input-material" type="text" name="registerUsername" placeholder="请输入用户名" >
 								      <div class="invalid-feedback">
 								        	用户名必须在2~10位之间
 								      </div>
@@ -50,10 +43,12 @@
 								        	两次密码必须相同 且在6~10位之间
 								      </div>
                     </div>
+                  <div style="float:right">
                     <div class="form-group">
                       <button id="regbtn" type="button" name="registerSubmit" class="btn btn-primary">注册</button>
                     </div>
-                  <small>已有账号?</small><a href="login.html" class="signup">&nbsp;登录</a>
+                    <small>已有账号?</small><a href="login.html" class="signup">&nbsp;登录</a>
+                  </div>
                 </div>
               </div>
             </div>
