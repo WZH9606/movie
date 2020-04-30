@@ -68,14 +68,19 @@
                     async:false,
                     dataType: 'json',
                     success: function(res){
-                        alert("登陆成功");
-                        if (res.data.userType == "老用户") {
-                            location="old_recommand.html";
-                            localStorage.setItem("userId",res.data.userId);
+                        if (res.code == 0){
+                            alert("登陆成功");
+                            if (res.data.userType == "老用户") {
+                                location="old_recommand.html";
+                                localStorage.setItem("userId",res.data.userId);
+                            } else {
+                                location="new_recommand.html";
+                                localStorage.setItem("userId",res.data.userId);
+                            }
                         } else {
-                            location="new_recommand.html";
-                            localStorage.setItem("userId",res.data.userId);
+                            alert("登陆失败");
                         }
+
                     },
                     error: function () {
                         alert("登陆失败");

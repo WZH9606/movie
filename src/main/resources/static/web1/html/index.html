@@ -46,7 +46,7 @@
 	   				<ul id="movies_description" class="row clearfix sy-allist sy-allist-oldheiglt">
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l1_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l1_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l1_2"> xxx 电影</h3>
 								<div id="l1_3">发布时间</div>
 								<div id="l1_4">导演</div>
@@ -59,7 +59,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l2_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l2_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l2_2"> xxx 电影</h3>
 								<div id="l2_3">发布时间</div>
 								<div id="l2_4">导演</div>
@@ -72,7 +72,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l3_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l3_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l3_2"> xxx 电影</h3>
 								<div id="l3_3">发布时间</div>
 								<div id="l3_4">导演</div>
@@ -85,7 +85,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l4_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l4_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l4_2"> xxx 电影</h3>
 								<div id="l4_3">发布时间</div>
 								<div id="l4_4">导演</div>
@@ -98,7 +98,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l5_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l5_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l5_2"> xxx 电影</h3>
 								<div id="l5_3">发布时间</div>
 								<div id="l5_4">导演</div>
@@ -111,7 +111,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l6_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l6_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l6_2"> xxx 电影</h3>
 								<div id="l6_3">发布时间</div>
 								<div id="l6_4">导演</div>
@@ -124,7 +124,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l7_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l7_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l7_2"> xxx 电影</h3>
 								<div id="l7_3">发布时间</div>
 								<div id="l7_4">导演</div>
@@ -137,7 +137,7 @@
 						</li>
 						<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="sy-albox">
-								<img class="admin_img" id="l8_1" src="../img/abt-bg.jpg"/>
+								<img class="admin_img" id="l8_1" src="" onerror="this.src='../img/admin.jpg'"/>
 								<h3 id="l8_2"> xxx 电影</h3>
 								<div id="l8_3">发布时间</div>
 								<div id="l8_4">导演</div>
@@ -185,12 +185,11 @@
                             $("#l" + (i+1) + "_1").attr('src',movies[i].picture);
                             $("#l" + (i+1) + "_2").html(movies[i].moviename);
                             $("#l" + (i+1) + "_3").html("发布时间：" +movies[i].releasetime.slice(0,10));
-                            $("#l" + (i+1) + "_4").html("导演：" +movies[i].director.slice(0,30) + "..."x);
+                            $("#l" + (i+1) + "_4").html("导演：" +movies[i].director.slice(0,30) + "...");
                             $("#l" + (i+1) + "_5").html("主演：" +movies[i].leadactors.slice(0,30) + "...");
                             $("#l" + (i+1) + "_6").html("评分：" +movies[i].averating);
                             $("#l" + (i+1) + "_7").html("位置：" +movies[i].numrating);
                             $("#l" + (i+1) + "_8").html("描述：" +movies[i].description.slice(0,100) + "...");
-                            $("#l" + (i+1) + "_9").html("类型：" +movies[i].typelist);
 
                             $("#l" + (i+1) + "_input").attr('value',0);
                         }
@@ -203,31 +202,7 @@
             // //放入页面的容器显示
             newajax();
 
-            $("#l8_button").click(function(){
-                // alert("abc");
-				var movieid = localStorage.getItem("l8_movieid");
-                var userid = localStorage.getItem("userid");
-                var rating=$("#l8_input").val();
 
-                alert(movieid + ":" + userid + ":" + rating);
-
-                $.ajax({
-                    type:"get",
-                    url:"http://localhost:10086/start/login?userId="+ userid,
-                    data:[{"movieId":movieid,"score":rating}],
-                    // async:true,
-                    dataType: 'json',
-                    success: function(res){
-                        alert(res);
-                        // location="index.html"
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-
-
-            })
 
 
         })
