@@ -86,6 +86,8 @@ html { overflow-y: scroll; min-width: 320px;}
 	color: white;
 	/*padding: 20px 11px; */
 	display: block; height: 80px; line-height: 80px; font-size: 20px; border-bottom: 3px deepskyblue solid;}
+.line_list li a:hover{ color:black; border-color: white;}
+
 
 
 
